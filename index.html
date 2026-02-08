@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory | Zekra.Code</title>
+    <!-- استيراد خطوط عربية كلاسيكية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* الألوان مستوحاة من الصورة المرفقة */
+            --bg-paper: #f3e9d2; /* لون الورق البيج */
+            --text-dark: #3e2723; /* لون الحبر البني الغامق */
+            --accent-gold: #c6a664; /* اللون الذهبي */
+            --shadow-color: rgba(62, 39, 35, 0.2);
+            --card-bg: #fff8e7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            background-color: var(--bg-paper);
+            color: var(--text-dark);
+            line-height: 1.8;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            overflow-x: hidden;
+        }
+
+        /* تنسيق العناوين */
+        h1, h2, h3 {
+            font-family: 'Aref Ruqaa', serif;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        /* الهيدر الرئيسي */
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        header::before, header::after {
+            content: "✦";
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin: 0 10px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(198, 166, 100, 0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #5d4037;
+        }
+
+        /* الحاويات */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* الأقسام */
+        section {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-gold);
+            border-radius: 8px;
+            box-shadow: 5px 5px 15px var(--shadow-color);
+            position: relative;
+        }
+
+        /* زينة الزوايا */
+        section::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid var(--text-dark);
+            border-right: 2px solid var(--text-dark);
+        }
+        
+        section::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid var(--text-dark);
+            border-left: 2px solid var(--text-dark);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-gold);
+            margin: 10px auto;
+        }
+
+        /* النصوص */
+        .content-text {
+            font-size: 1.3rem;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        /* قائمة الأسعار */
+        .price-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px dashed var(--accent-gold);
+            transition: transform 0.3s ease;
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-item:hover {
+            transform: scale(1.02);
+            background-color: rgba(198, 166, 100, 0.1);
+            padding-right: 10px;
+            padding-left: 10px;
+            border-radius: 5px;
+        }
+
+        .service-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-family: 'Aref Ruqaa', serif;
+            color: #8d6e63;
+            background: #faedcd;
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        /* الأيقونات */
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-dark);
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top: 2px solid var(--accent-gold);
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .signature {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #5d4037;
+        }
+
+        /* تأثيرات الظهور */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* زر التواصل */
+        .cta-button {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 12px 40px;
+            background-color: var(--text-dark);
+            color: var(--bg-paper);
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            border: 2px solid var(--text-dark);
+            transition: all 0.3s ease;
+            font-family: 'Aref Ruqaa', serif;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--text-dark);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Memory</h1>
+        <p>حيث يلتقي عبق الماضي بسحر التكنولوجيا</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- قسم من نحن -->
+        <section class="fade-in">
+            <h2 class="section-title">من نحن</h2>
+            <p class="content-text">
+                نحن فريق شغوف يؤمن بأن الذكريات لا يجب أن تبهت مع الزمن. في عصر السرعة، قررنا أن ندمج أصالة المشاعر بدقة البرمجة. "ذكرى" ليست مجرد خدمة تصميم، بل هي محاولة لتخليد اللحظات السعيدة وتحويلها من مجرد صور في الهاتف إلى تجربة رقمية تفاعلية تبقى للأبد.
+            </p>
+            <p class="content-text">
+                نجمع بين أناقة التصميم الكلاسيكي وقوة التكنولوجيا الحديثة لنقدم لكم هدايا وحلولاً رقمية تلامس القلب قبل العين.
+            </p>
+        </section>
+
+        <!-- قسم الفكرة -->
+        <section class="fade-in">
+            <h2 class="section-title">فكرتنا</h2>
+            <p class="content-text">
+                فكرتنا بسيطة وعميقة: <strong>تحويل الشعور إلى رابط</strong>.
+                بدلاً من الهدايا التقليدية التي قد تُنسى، نقدم لكم بطاقات ومواقع إلكترونية مخصصة. سواء كانت تهنئة، ذكرى سنوية، أو حتى واجهة لمشروعك الصغير، نحن نصمم لك مساحة رقمية خاصة بك.
+            </p>
+            <p class="content-text">
+                أنت تعطينا الفكرة والصور، ونحن نبني لك عالماً صغيراً بداخل رابط، بتصاميم مستوحاة من فخامة الورق وجمال الخط العربي، ولكن بقلب تقني نابض.
+            </p>
+        </section>
+
+        <!-- قسم الأسعار (مطابق للصورة) -->
+        <section class="fade-in">
+            <h2 class="section-title">قائمة أسعار خدمات التصميم</h2>
+            
+            <ul class="price-list">
+                <!-- خدمة 1 -->
+                <li class="price-item">
+                    <span class="service-name">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M20,6H16V4A2,2 0 0,0 14,2H10A2,2 0 0,0 8,4V6H4C2.89,6 2,6.89 2,8V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V8C22,6.89 21.11,6 20,6M10,4H14V6H10V4M20,19H4V8H20V19M12,12A3,3 0 0,1 15,15A3,3 0 0,1 12,18A3,3 0 0,1 9,15A3,3 0 0,1 12,12Z" />
+                        </svg>
+                        تصميم لمحل بيع وشراء
+                    </span>
+                    <span class="service-price">10 دنانير</span>
+                </li>
+
+                <!-- خدمة 2 -->
+                <li class="price-item">
+                    <span class="service-name">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+                        </svg>
+                        تصميم فكرة رومانسية
+                    </span>
+                    <span class="service-price">5 دنانير</span>
+                </li>
+
+                <!-- خدمة 3 -->
+                <li class="price-item">
+                    <span class="service-name">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M20,2H4C2.89,2 2,2.89 2,4V16A2,2 0 0,0 4,18H8V22L12,18H20A2,2 0 0,0 22,16V4C22,2.89 21.11,2 20,2M20,16H11.17L9,18.17V16H4V4H20V16Z" />
+                        </svg>
+                        معايدة لشخص معين بقوالب جاهزة
+                    </span>
+                    <span class="service-price">3 دنانير</span>
+                </li>
+            </ul>
+
+            <a href="https://wa.me/962776814296" class="cta-button" target="_blank">
+                تواصل معنا عبر واتساب: 0776814296
+            </a>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>للتواصل المباشر: 0776814296</p>
+        <p>جميع الحقوق محفوظة © 2026</p>
+        <div class="signature">من إعداد قيس جازي</div>
+    </footer>
+
+    <script>
+        // كود بسيط لإظهار العناصر عند التمرير
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
